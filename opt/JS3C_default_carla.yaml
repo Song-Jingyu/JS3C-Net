@@ -1,7 +1,7 @@
 GENERAL:
   task: train  # train, test
   manual_seed: 123
-  dataset_dir: /home/yxu/data/semantic_kitti/dataset/ # sjy edit
+  dataset_dir: ./carla_data/ # sjy edit
   debug: False
 
 DATA:
@@ -33,11 +33,11 @@ Completion:
   block_reps: 2
   use_coords: False
   mode: 0
-  full_scale: [256, 256, 32]
+  full_scale: [128, 128, 8]
   interaction: True
   pooling_type: mean
   fuse_k: 5
-  point_cloud_range: [0, -25.6, -2, 51.2, 25.6, 4.4]
+  point_cloud_range: [-25.6, -25.6, -2, 25.6, 25.6, 1]
   voxel_size: 0.2
   search_k: 8
   feat_relation: False

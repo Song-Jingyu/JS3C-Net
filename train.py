@@ -69,7 +69,7 @@ def main(args):
 
     shutil.copy('train.py', str(experiment_dir))
     shutil.copy('kitti_dataset.py', str(experiment_dir))
-    shutil.copy('carla_dataset.py', str(experiment_dir))
+    # shutil.copy('carla_dataset.py', str(experiment_dir))
     shutil.copy('poss_dataset.py', str(experiment_dir))
     shutil.copy('models/model_utils.py', str(experiment_dir))
     shutil.copy('models/'+args['Segmentation']['model_name'] + '.py', str(experiment_dir))

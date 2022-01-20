@@ -21,7 +21,7 @@ import torch.nn as nn
 from models import model_utils
 import sparseconvnet as scn
 from datetime import datetime
-import kitti_dataset
+import kitti_dataset_bk
 
 '''Inference'''
 def parse_args():
@@ -130,7 +130,7 @@ scn.checkpoint_restore(classifier, model_path, use_cuda)
 print('#classifer parameters %d' % sum([x.nelement() for x in classifier.parameters()]))
 
 dataset = importlib.import_module('kitti_dataset')
-input_data = kitti_dataset.get_dataset(config, split = args.dataset)
+input_data = kitti_dataset_bk.get_dataset(config, split = args.dataset)
 data_loader = torch.utils.data.DataLoader(
     input_data,
     batch_size=1,

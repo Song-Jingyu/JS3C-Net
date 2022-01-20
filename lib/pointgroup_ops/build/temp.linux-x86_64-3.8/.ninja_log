@@ -1,0 +1,4 @@
+# ninja log v5
+0	11692	1642647855237943051	/home/neofelis/jingyu/JS3C-Net/lib/pointgroup_ops/build/temp.linux-x86_64-3.8/src/pointgroup_ops.o	818a29dcbe89b279
+0	12483	1642647856025947171	/home/neofelis/jingyu/JS3C-Net/lib/pointgroup_ops/build/temp.linux-x86_64-3.8/src/pointgroup_ops_api.o	db8a1f0bb1ac90f9
+0	12575	1642647856121947672	/home/neofelis/jingyu/JS3C-Net/lib/pointgroup_ops/build/temp.linux-x86_64-3.8/src/cuda.o	504e0239f3b65fee

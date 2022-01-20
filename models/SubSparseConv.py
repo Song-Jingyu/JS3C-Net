@@ -27,7 +27,7 @@ class Unet(nn.Module):
                         reps=config['Segmentation']['block_reps'],
                         nPlanes=[m, 2*m, 3*m, 4*m, 5*m, 6*m, 7*m],
                         residual_blocks=config['Segmentation']['block_residual'],
-                        groups=config['Segmentation']['seg_groups']
+                        # groups=config['Segmentation']['seg_groups'] #sjy
                         )).add(
            scn.BatchNormReLU(m)).add(
            scn.OutputLayer(3))

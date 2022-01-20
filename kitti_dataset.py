@@ -13,20 +13,22 @@ import torch
 import spconv
 import math
 
-config_file = os.path.join('opt/semantic-kitti.yaml')
+config_file = os.path.join('opt/carla.yaml')
 kitti_config = yaml.safe_load(open(config_file, 'r'))
 remapdict = kitti_config["learning_map"]
 
 
 SPLIT_SEQUENCES = {
-    "train": ["00", "01", "02", "03", "04", "05", "06", "07", "09", "10"],
-    "valid": ["08"],
-    "test": ["11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21"]
+    "train": ["00", "01", "02", "03", "04", "05", "06", "07", "09", "10", "11", "12", "13", "14", "15", "16", "17"],
+    "valid": ["18", "19", "20"],
+    "test": ["21", "22", "23"]
 }
 
 SPLIT_FILES = {
-    "train": [".bin", ".label", ".invalid", ".occluded"],
-    "valid": [".bin", ".label", ".invalid", ".occluded"],
+    # "train": [".bin", ".label", ".invalid", ".occluded"],
+    "train": [".bin", ".label"],
+    # "valid": [".bin", ".label", ".invalid", ".occluded"],
+    "valid": [".bin", ".label"],
     "test": [".bin"]
 }
 
@@ -36,17 +38,17 @@ scan = laserscan.SemLaserScan(nclasses=20, sem_color_dict=kitti_config['color_ma
 
 def unpack(compressed):
     ''' given a bit encoded voxel grid, make a normal voxel grid out of it.  '''
-    uncompressed = np.zeros(compressed.shape[0] * 8, dtype=np.uint8)
-    uncompressed[::8] = compressed[:] >> 7 & 1
-    uncompressed[1::8] = compressed[:] >> 6 & 1
-    uncompressed[2::8] = compressed[:] >> 5 & 1
-    uncompressed[3::8] = compressed[:] >> 4 & 1
-    uncompressed[4::8] = compressed[:] >> 3 & 1
-    uncompressed[5::8] = compressed[:] >> 2 & 1
-    uncompressed[6::8] = compressed[:] >> 1 & 1
-    uncompressed[7::8] = compressed[:] & 1
+    # uncompressed = np.zeros(compressed.shape[0] * 8, dtype=np.uint8)
+    # uncompressed[::8] = compressed[:] >> 7 & 1
+    # uncompressed[1::8] = compressed[:] >> 6 & 1
+    # uncompressed[2::8] = compressed[:] >> 5 & 1
+    # uncompressed[3::8] = compressed[:] >> 4 & 1
+    # uncompressed[4::8] = compressed[:] >> 3 & 1
+    # uncompressed[5::8] = compressed[:] >> 2 & 1
+    # uncompressed[6::8] = compressed[:] >> 1 & 1
+    # uncompressed[7::8] = compressed[:] & 1
 
-    return uncompressed
+    return compressed
 
 class get_dataset(Dataset):
     def __init__(self, config, split="train", augment=False):
@@ -66,11 +68,13 @@ class get_dataset(Dataset):
                                18: 'traffic-sign'}
 
         for sequence in SPLIT_SEQUENCES[split]:
-            complete_path = os.path.join(config['GENERAL']['dataset_dir'], "sequences", sequence, "voxels")
+            complete_path = os.path.join(config['GENERAL']['dataset_dir'], "sequences", sequence, "evaluation")
             if not os.path.exists(complete_path): raise RuntimeError("Voxel directory missing: " + complete_path)
 
             files = os.listdir(complete_path)
+            print(files)
             for ext in SPLIT_FILES[split]:
+                print(ext)
                 comletion_data = sorted([os.path.join(complete_path, f) for f in files if f.endswith(ext)])
                 if len(comletion_data) == 0: raise RuntimeError("Missing data for " + EXT_TO_NAME[ext])
                 self.files[EXT_TO_NAME[ext]].extend(comletion_data)
@@ -138,19 +142,21 @@ class get_dataset(Dataset):
         # read raw data and unpack (if necessary)
         for typ in self.files.keys():
             if typ == "label":
-                scan_data = np.fromfile(self.files[typ][t], dtype=np.uint16)
+                scan_data = np.fromfile(self.files[typ][t], dtype=np.uint32)
                 scan_data = self.comletion_remap_lut[scan_data]
             else:
-                scan_data = unpack(np.fromfile(self.files[typ][t], dtype=np.uint8))
+                scan_data = unpack(np.fromfile(self.files[typ][t], dtype=np.float32))
             scan_data = scan_data.reshape(self.config['Completion']['full_scale'])
             scan_data = data_augmentation(torch.Tensor(scan_data).unsqueeze(0), stat)
             # turn in actual voxel grid representation.
             completion_collection[typ] = scan_data
 
         '''Load Segmentation Data'''
-        seg_point_name = self.seg_path + self.files['input'][t][self.files['input'][t].find('sequences'):].replace('voxels','velodyne')
-        seg_label_name = self.seg_path + self.files['label'][t][self.files['label'][t].find('sequences'):].replace('voxels','labels')
+        seg_point_name = self.seg_path + self.files['input'][t][self.files['input'][t].find('sequences'):].replace('evaluation','velodyne')
+        seg_label_name = self.seg_path + self.files['label'][t][self.files['label'][t].find('sequences'):].replace('evaluation','labels')
 
+        # print(seg_point_name)
+        # print(seg_label_name)
         scan.open_scan(seg_point_name)
         scan.open_label(seg_label_name)
         remissions = scan.remissions

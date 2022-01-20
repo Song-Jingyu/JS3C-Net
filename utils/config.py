@@ -14,7 +14,7 @@ warnings.filterwarnings('ignore')
 def get_parser():
     parser = argparse.ArgumentParser(description='Point Cloud Segmentation')
     parser.add_argument('--gpu', type=str, default='0', help='GPU idx')
-    parser.add_argument('--config', type=str, default='opt/JS3C_default_kitti.yaml', help='path to config file')
+    parser.add_argument('--config', type=str, default='opt/JS3C_default_carla.yaml', help='path to config file')
     parser.add_argument('--log_dir', type=str, default=None, help='path to log file')
     parser.add_argument('--debug', default=False, action='store_true')
 
@@ -24,7 +24,7 @@ def get_parser():
     args_cfg = parser.parse_args()
     assert args_cfg.config is not None
     with open(args_cfg.config, 'r') as f:
-        config = yaml.load(f)
+        config = yaml.safe_load(f)
     config['gpu'] = args_cfg.gpu
     config['config'] = args_cfg.config
     config['log_dir'] = args_cfg.log_dir

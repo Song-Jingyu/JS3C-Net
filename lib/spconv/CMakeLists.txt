@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.13 FATAL_ERROR)
 project(SparseConv LANGUAGES CXX CUDA VERSION 1.0)
-
+set(CMAKE_CXX_STANDARD 14)
 option(SPCONV_BuildTests "Build the unit tests when BUILD_TESTING is enabled." ON)
 set(CMAKE_CXX_EXTENSIONS OFF) # avoid gnu++11 be added to CXX flags
 
