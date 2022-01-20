@@ -90,10 +90,10 @@ class J3SC_Net(nn.Module):
         coords = complet_inputs['complet_coords']
         coords = coords[:, [0, 3, 2, 1]]
 
-        if self.args['DATA']['dataset'] == 'SemanticKITTI':
-            coords[:, 3] += 1  # TODO SemanticKITTI will generate [256,256,31]
-        elif self.args['DATA']['dataset'] == 'SemanticPOSS':
-            coords[:, 3][coords[:, 3] > 31] = 31
+        # if self.args['DATA']['dataset'] == 'SemanticKITTI':
+        #     coords[:, 3] += 1  # TODO SemanticKITTI will generate [256,256,31]
+        # elif self.args['DATA']['dataset'] == 'SemanticPOSS':
+        #     coords[:, 3][coords[:, 3] > 31] = 31
 
         if self.args['Completion']['feeding'] == 'both':
             feeding = torch.cat([seg_output, feat], 1)

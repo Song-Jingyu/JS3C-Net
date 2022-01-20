@@ -69,6 +69,7 @@ def main(args):
 
     shutil.copy('train.py', str(experiment_dir))
     shutil.copy('kitti_dataset.py', str(experiment_dir))
+    shutil.copy('carla_dataset.py', str(experiment_dir))
     shutil.copy('poss_dataset.py', str(experiment_dir))
     shutil.copy('models/model_utils.py', str(experiment_dir))
     shutil.copy('models/'+args['Segmentation']['model_name'] + '.py', str(experiment_dir))
@@ -108,10 +109,10 @@ def main(args):
             coords = complet_inputs['complet_coords']
             coords = coords[:, [0, 3, 2, 1]]
 
-            if args['DATA']['dataset'] == 'SemanticKITTI':
-                coords[:, 3] += 1  # TODO SemanticKITTI will generate [256,256,31]
-            elif args['DATA']['dataset'] == 'SemanticPOSS':
-                coords[:, 3][coords[:, 3] > 31] = 31
+            # if args['DATA']['dataset'] == 'SemanticKITTI':
+            #     coords[:, 3] += 1  # TODO SemanticKITTI will generate [256,256,31]
+            # elif args['DATA']['dataset'] == 'SemanticPOSS':
+            #     coords[:, 3][coords[:, 3] > 31] = 31
 
             if args['Completion']['feeding'] == 'both':
                 feeding = torch.cat([seg_output, feat],1)
