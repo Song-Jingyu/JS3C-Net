@@ -21,7 +21,7 @@ def get_parser():
     ### pretrain
     parser.add_argument('--pretrain', type=str, default='', help='path to pretrain model')
 
-    args_cfg = parser.parse_args()
+    args_cfg = parser.parse_args(args=[])
     assert args_cfg.config is not None
     with open(args_cfg.config, 'r') as f:
         config = yaml.safe_load(f)

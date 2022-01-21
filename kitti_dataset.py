@@ -72,9 +72,9 @@ class get_dataset(Dataset):
             if not os.path.exists(complete_path): raise RuntimeError("Voxel directory missing: " + complete_path)
 
             files = os.listdir(complete_path)
-            print(files)
+            # print(files)
             for ext in SPLIT_FILES[split]:
-                print(ext)
+                # print(ext)
                 comletion_data = sorted([os.path.join(complete_path, f) for f in files if f.endswith(ext)])
                 if len(comletion_data) == 0: raise RuntimeError("Missing data for " + EXT_TO_NAME[ext])
                 self.files[EXT_TO_NAME[ext]].extend(comletion_data)
@@ -114,8 +114,8 @@ class get_dataset(Dataset):
             compl_labelweights = complt_num_per_class / np.sum(complt_num_per_class)
             self.compl_labelweights = np.power(np.amax(compl_labelweights) / compl_labelweights, 1 / 3.0)
         else:
-            self.compl_labelweights = torch.Tensor(np.ones(20) * 3)
-            self.seg_labelweights = torch.Tensor(np.ones(19))
+            self.compl_labelweights = torch.Tensor(np.ones(25) * 3)
+            self.seg_labelweights = torch.Tensor(np.ones(24))
             self.compl_labelweights[0] = 1
 
         self.voxel_generator = spconv.utils.VoxelGenerator(
@@ -146,6 +146,10 @@ class get_dataset(Dataset):
                 scan_data = self.comletion_remap_lut[scan_data]
             else:
                 scan_data = unpack(np.fromfile(self.files[typ][t], dtype=np.float32))
+                invalid_data = scan_data==0 # sjy edit
+                invalid_data = invalid_data.reshape(self.config['Completion']['full_scale'])
+                invalid_data = data_augmentation(torch.Tensor(invalid_data).unsqueeze(0), stat)
+                completion_collection['invalid'] = invalid_data
             scan_data = scan_data.reshape(self.config['Completion']['full_scale'])
             scan_data = data_augmentation(torch.Tensor(scan_data).unsqueeze(0), stat)
             # turn in actual voxel grid representation.
@@ -243,7 +247,10 @@ def sparse_tensor_augmentation(st, states):
     t = st.dense()
     channels = t.shape[1]
     for b in range(batch_size):
+        print(t[b].shape)
         t[b] = data_augmentation(t[b], states[b])
+        print(t[b].shape)
+    # https://github.com/pytorch/pytorch/issues/21136
     coords = torch.sum(torch.abs(t), dim=1).nonzero().type(torch.int32)
     features = t.permute(0, 2, 3, 4, 1).reshape(-1, channels)
     features = features[torch.sum(torch.abs(features), dim=1).nonzero(), :]
