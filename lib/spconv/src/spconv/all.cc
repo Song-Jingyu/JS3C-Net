@@ -16,6 +16,8 @@
 #include <spconv/pool_ops.h>
 #include <spconv/spconv_ops.h>
 
+// https://github.com/pytorch/extension-script/issues/6
+// sjy edit: remove jit
 static auto registry =
     torch::RegisterOperators("spconv::get_indice_pairs_2d", &spconv::getIndicePair<2>)
         .op("spconv::get_indice_pairs_3d", &spconv::getIndicePair<3>)
