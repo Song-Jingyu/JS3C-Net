@@ -21,7 +21,7 @@ def get_parser():
     ### pretrain
     parser.add_argument('--pretrain', type=str, default='', help='path to pretrain model')
 
-    args_cfg = parser.parse_args(args=[])
+    args_cfg = parser.parse_args(args=[])# sjy add [] - https://stackoverflow.com/questions/45823991/argparse-in-ipython-notebook-unrecognized-arguments-f
     assert args_cfg.config is not None
     with open(args_cfg.config, 'r') as f:
         config = yaml.safe_load(f)
