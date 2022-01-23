@@ -4,6 +4,7 @@
 ## Jingyu edit this script for the JS3CNet dataloading
 
 import os
+from pyexpat import features
 from black import out
 import numpy as np
 import random
@@ -35,6 +36,7 @@ class CarlaDataset(Dataset):
         binary_counts=False,
         random_flips=False,
         JS3C=True,
+        split='Train',
         ):
         '''Constructor.
         Parameters:
@@ -69,6 +71,20 @@ class CarlaDataset(Dataset):
             self.comletion_remap_lut = remap_lut
             self.seg_remap_lut = seg_remap_lut
             self.augment = False
+            
+
+            if split == 'train':
+                seg_num_per_class = np.array(config['TRAIN']['seg_num_per_class'])
+                complt_num_per_class = np.array(config['TRAIN']['complt_num_per_class'])
+
+                seg_labelweights = seg_num_per_class / np.sum(seg_num_per_class)
+                self.seg_labelweights = np.power(np.amax(seg_labelweights) / seg_labelweights, 1 / 3.0)
+                compl_labelweights = complt_num_per_class / np.sum(complt_num_per_class)
+                self.compl_labelweights = np.power(np.amax(compl_labelweights) / compl_labelweights, 1 / 3.0)
+            else:
+                self.compl_labelweights = torch.Tensor(np.ones(25) * 3)
+                self.seg_labelweights = torch.Tensor(np.ones(24))
+                self.compl_labelweights[0] = 1
 
 
         
@@ -93,7 +109,8 @@ class CarlaDataset(Dataset):
         self.coor_ranges = self._eval_param['min_bound'] + self._eval_param['max_bound']
         self.voxel_sizes = [abs(self.coor_ranges[3] - self.coor_ranges[0]) / self._grid_size[0], 
                       abs(self.coor_ranges[4] - self.coor_ranges[1]) / self._grid_size[1],
-                      abs(self.coor_ranges[5] - self.coor_ranges[2]) / self._grid_size[2]]
+                      abs(self.coor_ranges[5] - self.coor_ranges[2]+0.2) / self._grid_size[2]]
+        # print(self.voxel_sizes)
         self.min_bound = np.asarray(self.coor_ranges[:3])
         self.max_bound = np.asarray(self.coor_ranges[3:])
         self.voxel_sizes = np.asarray(self.voxel_sizes)
@@ -112,7 +129,7 @@ class CarlaDataset(Dataset):
             voxel_size=[config['Completion']['voxel_size']]*3,
             point_cloud_range=config['Completion']['point_cloud_range'],
             max_num_points=20,
-            max_voxels=256 * 256 * 32
+            max_voxels=128 * 128 * 8
         )
 
         for scene in self._scenes:
@@ -210,17 +227,14 @@ class CarlaDataset(Dataset):
             label = label & 0xFFFF
             label = self.seg_remap_lut[label]
 
-            if self.config['Segmentation']['use_coords']:
-                feature = np.concatenate([xyz, remissions.reshape(-1, 1)], 1)
-            else:
-                feature = remissions.reshape(-1, 1)
+            
 
 
             if self.config['Segmentation']['use_coords']:
                 feature = np.concatenate([xyz, remissions.reshape(-1, 1)], 1)
             else:
                 feature = remissions.reshape(-1, 1)
-
+            
             '''Process Segmentation Data'''
             segmentation_collection = {}
             coords, label, feature, idxs = self.process_seg_data(xyz, label, feature)
@@ -232,9 +246,14 @@ class CarlaDataset(Dataset):
 
             '''Generate Alignment Data'''
             aliment_collection = {}
+            # print(xyz.shape)
+            # print(idxs)
             xyz = xyz[idxs]
+            # print(xyz.shape)
+
             voxels, coords, num_points_per_voxel = self.voxel_generator.generate(np.concatenate([xyz, np.arange(len(xyz)).reshape(-1,1)],-1))
             voxel_centers = (coords[:, ::-1] + 0.5) * self.voxel_generator.voxel_size + self.voxel_generator.point_cloud_range[0:3]
+            # print(np.max(coords))
             aliment_collection.update({
                 'voxels': voxels,
                 'coords': coords,

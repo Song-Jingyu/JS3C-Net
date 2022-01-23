@@ -4,6 +4,7 @@ Author: Xu Yan
 File: model_utils.py
 Date: 2020/4/22 13:20
 """
+from pyexpat import features
 import numpy as np
 import torch.nn as nn
 import torch
@@ -56,7 +57,12 @@ class VoxelPooling(nn.Module):
             group_first = index[:, 0].view((N, 1)).repeat([1, K]).to(device)
             mask = index == 0
             index[mask] = group_first[mask]
+        # print(N,K)
+        
         flat_index = index.reshape((N * K,))
+        # print(f'torch max flat index {torch.max(flat_index)}')
+        # print(f'torch min flat index {torch.min(flat_index)}')
+        # print(feature.shape)
         selected_feat = feature[flat_index, ]
         if K > 1:
             selected_feat = selected_feat.reshape((N, K, -1))
@@ -154,8 +160,8 @@ class interaction_module(nn.Module):
                                                kernel_size=1,
                                                bn=True,
                                                activation=nn.LeakyReLU(0.2))
-        self.fuse_mlps = conv_base.FC(in_size=m+20,
-                                      out_size=20,
+        self.fuse_mlps = conv_base.FC(in_size=m+25, #sjy hard code shape here
+                                      out_size=25,
                                       bn=True,
                                       activation=nn.LeakyReLU(0.2))
 
@@ -166,8 +172,11 @@ class interaction_module(nn.Module):
         indices = feat2.indices
 
         batch_size = feat1.batch_size
+        # print(f'feature1 is {feat1.features}')
         coord1, features1 = extract_coord_features(feat1.dense().detach())
         coord2, features2 = extract_coord_features(feat2.dense())
+        # print(f'feature1 is {features1.shape}')
+        # print(f'feature2 is {features2.shape}')
         xyz1 = align_pnt(coord1, self.voxelsize, self.point_range) # [0, -25.6, -2, 51.2, 25.6, 4.4]
         xyz2 = align_pnt(coord2, self.voxelsize*2, self.point_range)
         ind = torch.zeros(features2.shape[0], self.k)
@@ -219,7 +228,9 @@ def align_pnt(pnt, voxel_size, pnt_range):
 def extract_coord_features(t):
     device = t.device
     channels = int(t.shape[1])
+    # print(f't is {t}')
     coords = torch.sum(torch.abs(t), dim=1).nonzero().type(torch.int32).to(device)
+    # print(f'coords is {coords}')
     features = t.permute(0, 2, 3, 4, 1).reshape(-1, channels)
     features = features[torch.sum(torch.abs(features), dim=1).nonzero(), :]
     features = features.squeeze(1)

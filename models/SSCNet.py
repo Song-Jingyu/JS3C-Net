@@ -110,11 +110,14 @@ class SSCNet(nn.Module):
         if self.args['Completion']['interaction']:
             coord, features = model_utils.extract_coord_features(x)
             if self.args['Completion']['feeding'] == 'both':
+                # print(f'feat features in SSCNet is {feat.features}')
                 feat.features = feat.features[:, self.args['DATA']['classes_seg']:]
             x = spconv.SparseConvTensor(features=features.float(),
                                         indices=coord.int(),
                                         spatial_shape=[int(s/2) for s in self.args['Completion']['full_scale']],
                                         batch_size=self.args['TRAIN']['batch_size'])
+            # print(f'feat features before interation is {feat.features.shape}')
+            # print(f'feat features after SSCNet is {feat.features}')
             x = self.interaction_module(feat, x)
         x = self.upsample(x)
 

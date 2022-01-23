@@ -33,7 +33,7 @@ SPLIT_FILES = {
 }
 
 EXT_TO_NAME = {".bin": "input", ".label": "label", ".invalid": "invalid", ".occluded": "occluded"}
-scan = laserscan.SemLaserScan(nclasses=20, sem_color_dict=kitti_config['color_map'])
+scan = laserscan.SemLaserScan(nclasses=25, sem_color_dict=kitti_config['color_map'])
 
 
 def unpack(compressed):
@@ -247,10 +247,7 @@ def sparse_tensor_augmentation(st, states):
     t = st.dense()
     channels = t.shape[1]
     for b in range(batch_size):
-        print(t[b].shape)
         t[b] = data_augmentation(t[b], states[b])
-        print(t[b].shape)
-    # https://github.com/pytorch/pytorch/issues/21136
     coords = torch.sum(torch.abs(t), dim=1).nonzero().type(torch.int32)
     features = t.permute(0, 2, 3, 4, 1).reshape(-1, channels)
     features = features[torch.sum(torch.abs(features), dim=1).nonzero(), :]
