@@ -1,3 +1,4 @@
 log/*
 carla_data/*
 test/*
+*.pth

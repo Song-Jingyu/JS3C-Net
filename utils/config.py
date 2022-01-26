@@ -16,7 +16,7 @@ def get_parser():
     parser.add_argument('--gpu', type=str, default='0', help='GPU idx')
     parser.add_argument('--config', type=str, default='opt/JS3C_default_carla.yaml', help='path to config file')
     parser.add_argument('--log_dir', type=str, default=None, help='path to log file')
-    parser.add_argument('--debug', default=False, action='store_true')
+    # parser.add_argument('--debug', default=Tr, action='store_true')
 
     ### pretrain
     parser.add_argument('--pretrain', type=str, default='', help='path to pretrain model')
@@ -28,7 +28,7 @@ def get_parser():
     config['gpu'] = args_cfg.gpu
     config['config'] = args_cfg.config
     config['log_dir'] = args_cfg.log_dir
-    config['GENERAL']['debug'] = args_cfg.debug
+    # config['GENERAL']['debug'] = args_cfg.debug
     return config
 
 cfg = get_parser()
