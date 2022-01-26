@@ -337,7 +337,7 @@ def main(args):
             log_string('Best completion IoU: %f' % (best_iou_complt * 100))
 
         global_epoch += 1
-    log_string('Done!')
+    l og_string('Done!')
 
 if __name__ == '__main__':
     os.environ["CUDA_VISIBLE_DEVICES"] = args['gpu']
