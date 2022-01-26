@@ -66,7 +66,7 @@
   },
   "TRAIN": {
     "epochs": 100,
-    "train_workers": 10,
+    "train_workers": 16,
     "optim": "Adam",
     "batch_size": 8,
     "learning_rate": 0.001,

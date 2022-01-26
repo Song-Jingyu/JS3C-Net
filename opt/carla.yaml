@@ -153,6 +153,7 @@ learning_map_inv: # inverse of previous map
   22: 22    # "pole"
   23: 23    # "traffic-sign"
   24: 24     # "other-object" to "unlabeled" ----------------------------mapped
+
 learning_ignore: # Ignore classes
   0: True      # "unlabeled", and others ignored
   1: False     # "car"
@@ -202,3 +203,29 @@ split: # sequence numbers
   test:
     - 17
     - 18
+
+class_strings: 
+  0 : "building"
+  1: "fences"
+  2: "other"
+  3: "pedestrian"
+  4: "pole"
+  5: "road-lines"
+  6: "road"
+  7: "sidewalk"
+  8: "vegetation"
+  9: "vehicle"
+  10: "wall"
+  11: "traffic-sign"
+  12: "sky"
+  13: "ground"
+  14: "bridge"
+  15: "rail-track"
+  16: "guard-rail"
+  17: "traffic-light"
+  18: "static"
+  19: "dynamic"
+  20: "water"
+  21: "terrain"
+  22: "extra-1"
+  23: "extra-2"
