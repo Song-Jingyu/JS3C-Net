@@ -3,6 +3,7 @@
 
 ## Jingyu edit this script for the JS3CNet dataloading
 
+from distutils.command.config import config
 import os
 from pyexpat import features
 from black import out
@@ -37,6 +38,7 @@ class CarlaDataset(Dataset):
         random_flips=False,
         JS3C=True,
         split='Train',
+        remap=True,
         ):
         '''Constructor.
         Parameters:
@@ -52,12 +54,15 @@ class CarlaDataset(Dataset):
         self.random_flips = random_flips
         self.JS3C = JS3C
         self.config = config
+        self.remap = remap
 
         # sjy add
         if self.JS3C:
             config_file = os.path.join('opt/carla.yaml')
             kitti_config = yaml.safe_load(open(config_file, 'r'))
             remapdict = kitti_config["learning_map"]
+            self.remaparray = np.array(list(remapdict.values()))
+            # print(remapdict.keys())
             maxkey = max(remapdict.keys())
             remap_lut = np.zeros((maxkey + 100), dtype=np.int32)
             remap_lut[list(remapdict.keys())] = list(remapdict.values())
@@ -74,17 +79,24 @@ class CarlaDataset(Dataset):
             
 
             if split == 'train':
-                seg_num_per_class = np.array(config['TRAIN']['seg_num_per_class'])
+                # seg_num_per_class = np.array(config['TRAIN']['seg_num_per_class'])
                 complt_num_per_class = np.array(config['TRAIN']['complt_num_per_class'])
+                num_classes = 11
+                # seg_counts = np.zeros(num_classes-1)
+                com_counts = np.zeros(num_classes)
+                
+                for cls in range(len(com_counts)):
+                    com_counts[remapdict[cls]] += complt_num_per_class[cls]
+                seg_counts = com_counts[1:]
 
-                seg_labelweights = seg_num_per_class / np.sum(seg_num_per_class)
+                seg_labelweights = seg_counts / np.sum(seg_counts)
                 self.seg_labelweights = np.power(np.amax(seg_labelweights) / seg_labelweights, 1 / 3.0)
-                compl_labelweights = complt_num_per_class / np.sum(complt_num_per_class)
+                compl_labelweights = com_counts / np.sum(com_counts)
                 self.compl_labelweights = np.power(np.amax(compl_labelweights) / compl_labelweights, 1 / 3.0)
             else:
-                self.compl_labelweights = torch.Tensor(np.ones(25) * 3)
-                self.seg_labelweights = torch.Tensor(np.ones(24))
-                self.compl_labelweights[0] = 1
+                self.compl_labelweights = torch.Tensor(np.ones(11) * 3) 
+                self.seg_labelweights = torch.Tensor(np.ones(10))
+                self.compl_labelweights[0] = 1 #TODO: find out why 
 
 
         
@@ -201,10 +213,12 @@ class CarlaDataset(Dataset):
             completion_collection['stat'] = stat
 
             output = np.fromfile(self._eval_labels[idx_range[-1]],dtype=np.uint32).reshape(self._eval_size).astype(np.uint8)
+            if self.remap:
+                output = self.remaparray[output]
             counts = np.fromfile(self._eval_counts[idx_range[-1]],dtype=np.float32).reshape(self._eval_size)
             
             output = self.data_augmentation(torch.Tensor(output).unsqueeze(0), stat)
-            invalid = counts==0
+            invalid = counts<=0
             invalid = self.data_augmentation(torch.Tensor(invalid).unsqueeze(0), stat)
             counts = counts>0
             counts = self.data_augmentation(torch.Tensor(counts).unsqueeze(0), stat)
@@ -224,6 +238,8 @@ class CarlaDataset(Dataset):
 
             pred = np.fromfile(self._pred_list[idx_range[-1]],dtype=np.float32).reshape(-1,3)
             label = np.fromfile(self._label_list[idx_range[-1]],dtype=np.uint32)
+            if self.remap:
+                label = self.remaparray[label]
             label = label & 0xFFFF
             label = self.seg_remap_lut[label]
 

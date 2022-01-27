@@ -100,59 +100,85 @@ content: # as a ratio with the total number of points
   259: 4.3840131989471124e-05
 # classes that are indistinguishable from single scan or inconsistent in
 # ground truth are mapped to their closest equivalent
+
+# LABELS_REMAP = np.array([
+#     0, # Free
+#     1, # Building
+#     2, # Barrier
+#     3, # Other
+#     4, # Pedestrian
+#     5, # Pole or Traffic Light/Sign
+#     6, # Roadline -> Road
+#     6, # Road
+#     8, # Sidewalk
+#     9, # Vegetation
+#     10, # Vehicles
+#     2, # Wall -> Barrier
+#     5, # Traffic Sign -> Pole
+#     3, # Sky -> Other
+#     7, # Ground
+#     3, # Bridge -> Other
+#     3, # Railtrack -> Other
+#     2, # GuardRail -> Barrier
+#     5, # Traffic Light -> Pole
+#     3, # Static -> Other
+#     3, # Dynamic -> Other
+#     3, # Water -> Other
+#     7, # Terrain -> Ground
+# ])
+
 learning_map: # ignore the 
   0 : 0     # "unlabeled"
-  1 : 1     # "outlier" mapped to "unlabeled" --------------------------mapped
-  2: 2     # "bicycle"
-  3: 3     # "bus" mapped to "other-vehicle" --------------------------mapped
-  4: 4     # "motorcycle"
-  5: 5     # "on-rails" mapped to "other-vehicle" ---------------------mapped
-  6: 6     # "truck"
-  7: 7     # "other-vehicle"
-  8: 8     # "person"
-  9: 9     # "bicyclist"
-  10: 10     # "motorcyclist"
-  11: 11     # "road"
-  12: 12    # "parking"
-  13: 13    # "sidewalk"
-  14: 14    # "other-ground"
-  15: 15    # "building"
-  16: 16    # "fence"
-  17: 17     # "other-structure" mapped to "unlabeled" ------------------mapped
-  18: 18     # "lane-marking" to "road" ---------------------------------mapped
-  19: 19    # "vegetation"
-  20: 20    # "trunk"
-  21: 21    # "terrain"
-  22: 22    # "pole"
-  23: 23    # "traffic-sign"
-  24: 24     # "other-object" to "unlabeled" ----------------------------mapped
+  1 : 1     # "building"
+  2 : 2     # "barrier/fence"
+  3 : 3     # "other"
+  4 : 4     # "pedestrian"
+  5 : 5     # "pole/traffic-sign"
+  6 : 6     # "roadline" mapped to "road" --------------------------mapped
+  7 : 6     # "road"
+  8 : 8     # "sidewalk"
+  9 : 9     # "vegetation"
+  10: 10     # "vehicles"
+  11: 2     # "wall" mapped to "fence" --------------------------mapped
+  12: 5    # "traffic-sign"
+  13: 3    # "sky" mapped to "other" --------------------------mapped
+  14: 7    # "other-ground"
+  15: 3    # "bridge" mapped to "other" --------------------------mapped
+  16: 3    # "rail-track" mapped to "unlabeled" --------------------------mapped
+  17: 2     # "guard-rail"
+  18: 5     # "traffic-light" mapped to "unlabeled" --------------------------mapped
+  19: 3    # "static" mapped to "unlabeled" --------------------------mapped
+  20: 3    # "dynamic" mapped to "unlabeled" --------------------------mapped
+  21: 3    # "water" mapped to "unlabeled" --------------------------mapped
+  22: 7    # "terrain"
+  23: 3    # "extra-1" mapped to "unlabeled" --------------------------mapped
+  24: 3     # "extra-2" mapped to "unlabeled" --------------------------mapped
 
 learning_map_inv: # inverse of previous map
   0 : 0     # "unlabeled"
-  1 : 1     # "outlier" mapped to "unlabeled" --------------------------mapped
-  2: 2     # "bicycle"
-  3: 3     # "bus" mapped to "other-vehicle" --------------------------mapped
-  4: 4     # "motorcycle"
-  5: 5     # "on-rails" mapped to "other-vehicle" ---------------------mapped
-  6: 6     # "truck"
-  7: 7     # "other-vehicle"
-  8: 8     # "person"
-  9: 9     # "bicyclist"
-  10: 10     # "motorcyclist"
-  11: 11     # "road"
-  12: 12    # "parking"
-  13: 13    # "sidewalk"
-  14: 14    # "other-ground"
-  15: 15    # "building"
-  16: 16    # "fence"
-  17: 17     # "other-structure" mapped to "unlabeled" ------------------mapped
-  18: 18     # "lane-marking" to "road" ---------------------------------mapped
-  19: 19    # "vegetation"
-  20: 20    # "trunk"
-  21: 21    # "terrain"
-  22: 22    # "pole"
-  23: 23    # "traffic-sign"
-  24: 24     # "other-object" to "unlabeled" ----------------------------mapped
+  1 : 1     # "building"
+  2: 2     # "fence"
+  3: 3     # "other"
+  4: 4     # "pedestrians"
+  5: 5     # "pole"
+  6: 7     # "road"
+  7: 14     # "ground"
+  8: 8     # "sidewalk"
+  9: 9     # "vegetation"
+  10: 10     # "vehicles"
+  # 11: 12     # "road"
+  # 12: 13    # "parking"
+  # 13: 14    # "sidewalk"
+  # 14: 15    # "other-ground"
+  # 15: 16    # "building"
+  # 16: 17    # "fence"
+  # 17: 18     # "other-structure" mapped to "unlabeled" ------------------mapped
+  # 18: 19     # "lane-marking" to "road" ---------------------------------mapped
+  # 19: 20    # "vegetation"
+  # 20: 21    # "trunk"
+  # 21: 22    # "terrain"
+  # 23: 23    # "traffic-sign"
+  # 24: 24     # "other-object" to "unlabeled" ----------------------------mapped
 
 learning_ignore: # Ignore classes
   0: True      # "unlabeled", and others ignored
@@ -204,28 +230,28 @@ split: # sequence numbers
     - 17
     - 18
 
+
+  # 0 : 0     # "unlabeled"
+  # 1 : 1     # "building"
+  # 2: 2     # "fence"
+  # 3: 3     # "other"
+  # 4: 4     # "pedestrians"
+  # 5: 5     # "pole"
+  # 6: 7     # "road"
+  # 7: 14     # "ground"
+  # 8: 8     # "sidewalk"
+  # 9: 9     # "vegetation"
+  # 10: 10     # "vehicles"
+
 class_strings: 
-  0 : "building"
-  1: "fences"
-  2: "other"
-  3: "pedestrian"
-  4: "pole"
-  5: "road-lines"
+  0 : "unlabeled"
+  1: "building"
+  2: "fence"
+  3: "other"
+  4: "pedestrians"
+  5: "pole"
   6: "road"
-  7: "sidewalk"
-  8: "vegetation"
-  9: "vehicle"
-  10: "wall"
-  11: "traffic-sign"
-  12: "sky"
-  13: "ground"
-  14: "bridge"
-  15: "rail-track"
-  16: "guard-rail"
-  17: "traffic-light"
-  18: "static"
-  19: "dynamic"
-  20: "water"
-  21: "terrain"
-  22: "extra-1"
-  23: "extra-2"
+  7: "ground"
+  8: "sidewalk"
+  9: "vegetation"
+  10: "vehicles"

@@ -6,8 +6,8 @@ GENERAL:
 
 DATA:
   dataset: SemanticKITTI
-  classes_seg: 24 # sjy edit
-  classes_completion: 25 # sjy edit
+  classes_seg: 10 # sjy edit
+  classes_completion: 11 # sjy edit
 
 Segmentation:
   model_name: SubSparseConv

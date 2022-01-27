@@ -160,8 +160,8 @@ class interaction_module(nn.Module):
                                                kernel_size=1,
                                                bn=True,
                                                activation=nn.LeakyReLU(0.2))
-        self.fuse_mlps = conv_base.FC(in_size=m+25, #sjy hard code shape here
-                                      out_size=25,
+        self.fuse_mlps = conv_base.FC(in_size=m+args['DATA']['classes_completion'], #sjy hard code shape here
+                                      out_size=args['DATA']['classes_completion'],
                                       bn=True,
                                       activation=nn.LeakyReLU(0.2))
 
