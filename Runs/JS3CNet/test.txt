@@ -1,0 +1,34 @@
+2022-01-27 23:59:24,750 - Model - INFO - 
+  ========================== COMPLETION RESULTS ==========================  
+2022-01-27 23:59:24,751 - Model - INFO - IoU class 0 [unlabeled] = 95.827
+2022-01-27 23:59:24,751 - Model - INFO - IoU class 1 [building] = 33.396
+2022-01-27 23:59:24,751 - Model - INFO - IoU class 2 [fences] = 5.410
+2022-01-27 23:59:24,751 - Model - INFO - IoU class 3 [other] = 19.299
+2022-01-27 23:59:24,751 - Model - INFO - IoU class 4 [pedestrian] = 35.219
+2022-01-27 23:59:24,751 - Model - INFO - IoU class 5 [pole] = 38.049
+2022-01-27 23:59:24,751 - Model - INFO - IoU class 6 [road] = 92.300
+2022-01-27 23:59:24,751 - Model - INFO - IoU class 7 [ground] = 18.830
+2022-01-27 23:59:24,751 - Model - INFO - IoU class 8 [sidewalk] = 73.294
+2022-01-27 23:59:24,752 - Model - INFO - IoU class 9 [vegetation] = 28.093
+2022-01-27 23:59:24,752 - Model - INFO - IoU class 10 [vehicle] = 55.357
+2022-01-27 23:59:24,752 - Model - INFO - Precision =	84.19
+Recall =	94.46
+IoU Cmpltn =	80.23
+mIoU SSC =	45.01
+2022-01-27 23:59:24,752 - Model - INFO - 
+  ========================== SEGMENTATION RESULTS ==========================  
+2022-01-27 23:59:24,752 - Model - INFO - IoU class 0 [building] = 66.253
+2022-01-27 23:59:24,752 - Model - INFO - IoU class 1 [fence] = 7.413
+2022-01-27 23:59:24,752 - Model - INFO - IoU class 2 [other] = 55.071
+2022-01-27 23:59:24,752 - Model - INFO - IoU class 3 [pedestrians] = 76.910
+2022-01-27 23:59:24,752 - Model - INFO - IoU class 4 [pole] = 65.009
+2022-01-27 23:59:24,753 - Model - INFO - IoU class 5 [road] = 95.954
+2022-01-27 23:59:24,753 - Model - INFO - IoU class 6 [ground] = 0.000
+2022-01-27 23:59:24,753 - Model - INFO - IoU class 7 [sidewalk] = 85.610
+2022-01-27 23:59:24,753 - Model - INFO - IoU class 8 [vegetation] = 80.277
+2022-01-27 23:59:24,753 - Model - INFO - IoU class 9 [vehicles] = 98.967
+2022-01-27 23:59:24,753 - Model - INFO - Eval point avg class IoU: 63.146348
+2022-01-27 23:59:24,753 - Model - INFO - 
+Best segmentation IoU: 63.146348
+2022-01-27 23:59:24,753 - Model - INFO - Best semantic completion IoU: 45.006838
+2022-01-27 23:59:24,753 - Model - INFO - Best completion IoU: 80.232036
