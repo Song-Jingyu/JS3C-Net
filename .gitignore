@@ -4,3 +4,4 @@ test/*
 *.pth
 Runs/*
 temp/*
+__pycache__/*
