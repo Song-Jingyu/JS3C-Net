@@ -1,4 +1,18 @@
 # JS3C-Net
+
+## This is a forked version of JS3C-Net for training on CarlaSC dataset. You can check the results on our [paper](TODO:paper_link)
+
+## Getting started with JS3CNet on the CarlaSC dataset
+You can check the information about the data and instructions on downloading on our CarlaSC dataset [website](https://umich-curly.github.io/CarlaSC.github.io/). You can also check our models to do scene completion on the [3DMapping](https://github.com/UMich-CURLY/3DMapping) repo.
+
+### Dependencies
+
+### Training
+
+### Testing
+
+<br />
+
 ### Sparse Single Sweep LiDAR Point Cloud Segmentation via Learning Contextual Shape Priors from Scene Completion (AAAI2021)
  
 This repository is for **JS3C-Net** introduced in the following **AAAI-2021** paper [[arxiv paper]](https://arxiv.org/abs/2012.03762)
