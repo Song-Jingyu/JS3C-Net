@@ -5,3 +5,4 @@ test/*
 Runs/*
 temp/*
 __pycache__/*
+.ipynb_checkpoints/*
