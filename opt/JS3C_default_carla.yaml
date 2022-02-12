@@ -8,6 +8,8 @@ DATA:
   dataset: SemanticKITTI
   classes_seg: 10 # sjy edit
   classes_completion: 11 # sjy edit
+  # classes_seg: 24 # sjy edit
+  # classes_completion: 25 # sjy edit
 
 Segmentation:
   model_name: SubSparseConv
@@ -44,9 +46,9 @@ Completion:
 
 TRAIN:
   epochs: 100
-  train_workers: 16 # data loader workers
+  train_workers: 10 # data loader workers
   optim: Adam # Adam or SGD
-  batch_size: 8
+  batch_size: 1
   learning_rate: 0.001
   lr_decay: 0.7
   decay_step: 10

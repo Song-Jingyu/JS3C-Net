@@ -81,7 +81,7 @@ class CarlaDataset(Dataset):
             if split == 'train':
                 # seg_num_per_class = np.array(config['TRAIN']['seg_num_per_class'])
                 complt_num_per_class = np.array(config['TRAIN']['complt_num_per_class'])
-                num_classes = 11
+                num_classes = config['DATA']['classes_completion']
                 # seg_counts = np.zeros(num_classes-1)
                 com_counts = np.zeros(num_classes)
                 
@@ -94,8 +94,8 @@ class CarlaDataset(Dataset):
                 compl_labelweights = com_counts / np.sum(com_counts)
                 self.compl_labelweights = np.power(np.amax(compl_labelweights) / compl_labelweights, 1 / 3.0)
             else:
-                self.compl_labelweights = torch.Tensor(np.ones(11) * 3) 
-                self.seg_labelweights = torch.Tensor(np.ones(10))
+                self.compl_labelweights = torch.Tensor(np.ones(config['DATA']['classes_completion']) * 3) 
+                self.seg_labelweights = torch.Tensor(np.ones(config['DATA']['classes_completion']-1))
                 self.compl_labelweights[0] = 1 #TODO: find out why 
 
 

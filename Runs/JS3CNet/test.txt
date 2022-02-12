@@ -32,3 +32,143 @@ mIoU SSC =	45.01
 Best segmentation IoU: 63.146348
 2022-01-27 23:59:24,753 - Model - INFO - Best semantic completion IoU: 45.006838
 2022-01-27 23:59:24,753 - Model - INFO - Best completion IoU: 80.232036
+2022-01-29 22:50:09,791 - Model - INFO - 
+  ========================== COMPLETION RESULTS ==========================  
+2022-01-29 22:50:09,791 - Model - INFO - IoU class 0 [unlabeled] = 95.621
+2022-01-29 22:50:09,791 - Model - INFO - IoU class 1 [building] = 33.272
+2022-01-29 22:50:09,791 - Model - INFO - IoU class 2 [fences] = 6.102
+2022-01-29 22:50:09,791 - Model - INFO - IoU class 3 [other] = 19.353
+2022-01-29 22:50:09,792 - Model - INFO - IoU class 4 [pedestrian] = 35.968
+2022-01-29 22:50:09,792 - Model - INFO - IoU class 5 [pole] = 38.526
+2022-01-29 22:50:09,792 - Model - INFO - IoU class 6 [road] = 92.272
+2022-01-29 22:50:09,792 - Model - INFO - IoU class 7 [ground] = 17.642
+2022-01-29 22:50:09,792 - Model - INFO - IoU class 8 [sidewalk] = 72.761
+2022-01-29 22:50:09,792 - Model - INFO - IoU class 9 [vegetation] = 27.017
+2022-01-29 22:50:09,792 - Model - INFO - IoU class 10 [vehicle] = 55.083
+2022-01-29 22:50:09,792 - Model - INFO - Precision =	83.21
+Recall =	94.68
+IoU Geometric =	79.5
+mIoU SSC =	44.87
+semantic accuracy =	94.44
+2022-01-29 22:50:09,792 - Model - INFO - 
+  ========================== SEGMENTATION RESULTS ==========================  
+2022-01-29 22:50:09,792 - Model - INFO - IoU class 0 [building] = 66.348
+2022-01-29 22:50:09,792 - Model - INFO - IoU class 1 [fence] = 7.429
+2022-01-29 22:50:09,792 - Model - INFO - IoU class 2 [other] = 55.241
+2022-01-29 22:50:09,792 - Model - INFO - IoU class 3 [pedestrians] = 77.644
+2022-01-29 22:50:09,793 - Model - INFO - IoU class 4 [pole] = 65.267
+2022-01-29 22:50:09,793 - Model - INFO - IoU class 5 [road] = 95.897
+2022-01-29 22:50:09,793 - Model - INFO - IoU class 6 [ground] = 0.000
+2022-01-29 22:50:09,793 - Model - INFO - IoU class 7 [sidewalk] = 85.397
+2022-01-29 22:50:09,793 - Model - INFO - IoU class 8 [vegetation] = 80.336
+2022-01-29 22:50:09,793 - Model - INFO - IoU class 9 [vehicles] = 98.960
+2022-01-29 22:50:09,793 - Model - INFO - Eval point avg class IoU: 63.251988
+2022-01-29 22:50:09,793 - Model - INFO - 
+Best segmentation IoU: 63.251988
+2022-01-29 22:50:09,793 - Model - INFO - Best semantic completion IoU: 44.874271
+2022-01-29 22:50:09,793 - Model - INFO - Best completion IoU: 79.500342
+2022-01-30 19:58:42,953 - Model - INFO - 
+  ========================== COMPLETION RESULTS ==========================  
+2022-01-30 19:58:42,953 - Model - INFO - IoU class 0 [unlabeled] = 0.000
+2022-01-30 19:58:42,953 - Model - INFO - IoU class 1 [building] = 0.000
+2022-01-30 19:58:42,953 - Model - INFO - IoU class 2 [fences] = 0.000
+2022-01-30 19:58:42,954 - Model - INFO - IoU class 3 [other] = 0.000
+2022-01-30 19:58:42,954 - Model - INFO - IoU class 4 [pedestrian] = 0.000
+2022-01-30 19:58:42,954 - Model - INFO - IoU class 5 [pole] = 0.000
+2022-01-30 19:58:42,954 - Model - INFO - IoU class 6 [road] = 0.000
+2022-01-30 19:58:42,954 - Model - INFO - IoU class 7 [ground] = 0.000
+2022-01-30 19:58:42,954 - Model - INFO - IoU class 8 [sidewalk] = 0.000
+2022-01-30 19:58:42,954 - Model - INFO - IoU class 9 [vegetation] = 0.000
+2022-01-30 19:58:42,954 - Model - INFO - IoU class 10 [vehicle] = 0.000
+2022-01-30 19:58:42,954 - Model - INFO - Precision =	0.0
+Recall =	0.0
+IoU Geometric =	nan
+mIoU SSC =	0.0
+semantic accuracy =	0.0
+2022-01-30 19:58:42,954 - Model - INFO - 
+  ========================== SEGMENTATION RESULTS ==========================  
+2022-01-30 19:58:42,954 - Model - INFO - IoU class 0 [building] = 0.000
+2022-01-30 19:58:42,954 - Model - INFO - IoU class 1 [fence] = 0.000
+2022-01-30 19:58:42,955 - Model - INFO - IoU class 2 [other] = 0.000
+2022-01-30 19:58:42,955 - Model - INFO - IoU class 3 [pedestrians] = 0.000
+2022-01-30 19:58:42,955 - Model - INFO - IoU class 4 [pole] = 0.000
+2022-01-30 19:58:42,955 - Model - INFO - IoU class 5 [road] = 0.000
+2022-01-30 19:58:42,955 - Model - INFO - IoU class 6 [ground] = 0.000
+2022-01-30 19:58:42,955 - Model - INFO - IoU class 7 [sidewalk] = 0.000
+2022-01-30 19:58:42,955 - Model - INFO - IoU class 8 [vegetation] = 0.000
+2022-01-30 19:58:42,955 - Model - INFO - IoU class 9 [vehicles] = 0.000
+2022-01-30 19:58:42,955 - Model - INFO - Eval point avg class IoU: 0.000000
+2022-01-30 19:58:42,955 - Model - INFO - 
+Best segmentation IoU: 0.000000
+2022-01-30 19:58:42,955 - Model - INFO - Best semantic completion IoU: 0.000000
+2022-01-30 19:58:42,955 - Model - INFO - Best completion IoU: 0.000000
+2022-01-30 21:27:30,577 - Model - INFO - 
+  ========================== COMPLETION RESULTS ==========================  
+2022-01-30 21:27:30,577 - Model - INFO - IoU class 0 [unlabeled] = 0.000
+2022-01-30 21:27:30,577 - Model - INFO - IoU class 1 [building] = 0.000
+2022-01-30 21:27:30,577 - Model - INFO - IoU class 2 [fences] = 0.000
+2022-01-30 21:27:30,578 - Model - INFO - IoU class 3 [other] = 0.000
+2022-01-30 21:27:30,578 - Model - INFO - IoU class 4 [pedestrian] = 0.000
+2022-01-30 21:27:30,578 - Model - INFO - IoU class 5 [pole] = 0.000
+2022-01-30 21:27:30,578 - Model - INFO - IoU class 6 [road-lines] = 0.000
+2022-01-30 21:27:30,578 - Model - INFO - IoU class 7 [road] = 0.000
+2022-01-30 21:27:30,578 - Model - INFO - IoU class 8 [sidewalk] = 0.000
+2022-01-30 21:27:30,578 - Model - INFO - IoU class 9 [vegetation] = 0.000
+2022-01-30 21:27:30,578 - Model - INFO - IoU class 10 [vehicle] = 0.000
+2022-01-30 21:27:30,578 - Model - INFO - Precision =	0.0
+Recall =	0.0
+IoU Geometric =	nan
+mIoU SSC =	0.0
+semantic accuracy =	0.0
+2022-01-30 21:27:30,578 - Model - INFO - 
+  ========================== SEGMENTATION RESULTS ==========================  
+2022-01-30 21:27:30,578 - Model - INFO - IoU class 0 [building] = 0.000
+2022-01-30 21:27:30,579 - Model - INFO - IoU class 1 [fence] = 0.000
+2022-01-30 21:27:30,579 - Model - INFO - IoU class 2 [other] = 0.000
+2022-01-30 21:27:30,579 - Model - INFO - IoU class 3 [pedestrians] = 0.000
+2022-01-30 21:27:30,579 - Model - INFO - IoU class 4 [pole] = 0.000
+2022-01-30 21:27:30,579 - Model - INFO - IoU class 5 [road] = 0.000
+2022-01-30 21:27:30,579 - Model - INFO - IoU class 6 [ground] = 0.000
+2022-01-30 21:27:30,579 - Model - INFO - IoU class 7 [sidewalk] = 0.000
+2022-01-30 21:27:30,579 - Model - INFO - IoU class 8 [vegetation] = 0.000
+2022-01-30 21:27:30,579 - Model - INFO - IoU class 9 [vehicles] = 0.000
+2022-01-30 21:27:30,579 - Model - INFO - Eval point avg class IoU: 0.000000
+2022-01-30 21:27:30,579 - Model - INFO - 
+Best segmentation IoU: 0.000000
+2022-01-30 21:27:30,579 - Model - INFO - Best semantic completion IoU: 0.000000
+2022-01-30 21:27:30,579 - Model - INFO - Best completion IoU: 0.000000
+2022-02-02 10:52:37,035 - Model - INFO - 
+  ========================== COMPLETION RESULTS ==========================  
+2022-02-02 10:52:37,037 - Model - INFO - IoU class 0 [unlabeled] = 0.000
+2022-02-02 10:52:37,037 - Model - INFO - IoU class 1 [building] = 0.000
+2022-02-02 10:52:37,037 - Model - INFO - IoU class 2 [fences] = 0.000
+2022-02-02 10:52:37,037 - Model - INFO - IoU class 3 [other] = 0.000
+2022-02-02 10:52:37,037 - Model - INFO - IoU class 4 [pedestrian] = 0.000
+2022-02-02 10:52:37,037 - Model - INFO - IoU class 5 [pole] = 0.000
+2022-02-02 10:52:37,037 - Model - INFO - IoU class 6 [road-lines] = 0.000
+2022-02-02 10:52:37,037 - Model - INFO - IoU class 7 [road] = 0.000
+2022-02-02 10:52:37,037 - Model - INFO - IoU class 8 [sidewalk] = 0.000
+2022-02-02 10:52:37,037 - Model - INFO - IoU class 9 [vegetation] = 0.000
+2022-02-02 10:52:37,037 - Model - INFO - IoU class 10 [vehicle] = 0.000
+2022-02-02 10:52:37,038 - Model - INFO - Precision =	0.0
+Recall =	0.0
+IoU Geometric =	nan
+mIoU SSC =	0.0
+semantic accuracy =	0.0
+2022-02-02 10:52:37,038 - Model - INFO - 
+  ========================== SEGMENTATION RESULTS ==========================  
+2022-02-02 10:52:37,038 - Model - INFO - IoU class 0 [building] = 0.000
+2022-02-02 10:52:37,038 - Model - INFO - IoU class 1 [fence] = 0.000
+2022-02-02 10:52:37,038 - Model - INFO - IoU class 2 [other] = 0.000
+2022-02-02 10:52:37,038 - Model - INFO - IoU class 3 [pedestrians] = 0.000
+2022-02-02 10:52:37,038 - Model - INFO - IoU class 4 [pole] = 0.000
+2022-02-02 10:52:37,038 - Model - INFO - IoU class 5 [road] = 0.000
+2022-02-02 10:52:37,038 - Model - INFO - IoU class 6 [ground] = 0.000
+2022-02-02 10:52:37,038 - Model - INFO - IoU class 7 [sidewalk] = 0.000
+2022-02-02 10:52:37,039 - Model - INFO - IoU class 8 [vegetation] = 0.000
+2022-02-02 10:52:37,039 - Model - INFO - IoU class 9 [vehicles] = 0.000
+2022-02-02 10:52:37,039 - Model - INFO - Eval point avg class IoU: 0.000000
+2022-02-02 10:52:37,039 - Model - INFO - 
+Best segmentation IoU: 0.000000
+2022-02-02 10:52:37,039 - Model - INFO - Best semantic completion IoU: 0.000000
+2022-02-02 10:52:37,039 - Model - INFO - Best completion IoU: 0.000000

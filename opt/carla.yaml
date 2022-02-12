@@ -64,6 +64,7 @@ color_map: # bgr
 
 # we should be able to not modify this
 content: # as a ratio with the total number of points
+# NOT used in our dataset
   0: 0.018889854628292943
   1: 0.0002937197336781505
   10: 0.040818519255974316
@@ -161,8 +162,10 @@ learning_map_inv: # inverse of previous map
   3: 3     # "other"
   4: 4     # "pedestrians"
   5: 5     # "pole"
-  6: 7     # "road"
-  7: 14     # "ground"
+  6: 6
+  7: 7
+  # 6: 7     # "road"
+  # 7: 14     # "ground"
   8: 8     # "sidewalk"
   9: 9     # "vegetation"
   10: 10     # "vehicles"
@@ -206,7 +209,9 @@ learning_ignore: # Ignore classes
   22: False    # "terrain"
   23: False    # "pole"
   24: False    # "traffic-sign"
+
 split: # sequence numbers
+# NOT used in our dataset
   train:
     - 0
     - 1

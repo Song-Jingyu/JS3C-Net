@@ -2,3 +2,5 @@ log/*
 carla_data/*
 test/*
 *.pth
+Runs/*
+temp/*
