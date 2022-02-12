@@ -2,16 +2,37 @@
 
 ## This is a forked version of JS3C-Net for training on CarlaSC dataset. You can check the results on our [paper](TODO:paper_link)
 
-## Getting started with JS3CNet on the CarlaSC dataset
+## Getting started with JS3CNet on the [CarlaSC](https://umich-curly.github.io/CarlaSC.github.io/) dataset
 You can check the information about the data and instructions on downloading on our CarlaSC dataset [website](https://umich-curly.github.io/CarlaSC.github.io/). You can also check our models to do scene completion on the [3DMapping](https://github.com/UMich-CURLY/3DMapping) repo.
 
 ### Dependencies
+The dependencies is the same as mentioned in JS3CNet [repo](https://github.com/yanx27/JS3C-Net). However, we slightly modify the `spconv` library to suit it to modern GPU architecture. The specific libraries we use are reported below.
+ - CUDA and cuDNN
+   - We are using CUDA 11.3 and cuDNN 8. The Pytorch version is the latest 
+   - We directly compile the operators developed by JS3CNet by `sh compile.sh` in `/lib`.
+   - As to spconv, we tried to use the latest version of official spconv `v2` or `v1.2.1` but failed. So we strongly recommend to use the provided `spconv` in `/lib`. We made a slight change on the provided `spconv` based on this [git issue](https://github.com/pytorch/extension-script/issues/6) to suit it to newer Pytorch.
+  
 
 ### Training
+ - To start with using [CarlaSC](https://umich-curly.github.io/CarlaSC.github.io/) dataset, make sure you download the dataset and unzip it.
+ - We provided a Jupyter notebook `JS3CNetCarla.ipynb` for using JS3CNet.
+   - We provide two types of setting files. The default is the reduced-label setting, you can also enabled all-label setting by change the config file path to `carla_all.yaml` in `/opt`. You can get more information about the two different settings in our [paper](paper_link).
+   - Change the `data_dir` variable in the notebook. We use a `TODO` comment to make it stand out.
+   - Change the `TEST` flag to `False` in the notebook. We use a `TODO` comment to make it stand out.
+   - There will be a folder containing the training log, weights etc. in `/Runs` folder.
 
 ### Testing
+ - We include the testing function in the same Jupyter notebook `JS3CNetCarla.ipynb`.
+   - Change the `TEST` flag to `True` in the notebook. We use a `TODO` comment to make it stand out.
+   - Change the `MODEL_DIR` variable in the notebook to load the specific weight. We use a `TODO` comment to make it stand out.
 
+## Our SC models
+You can check our **MotionSC** model and other implementations of SOTA SC models on the [3DMapping](https://github.com/UMich-CURLY/3DMapping) repo.
 <br />
+<br />
+<br />
+<br />
+
 
 ### Sparse Single Sweep LiDAR Point Cloud Segmentation via Learning Contextual Shape Priors from Scene Completion (AAAI2021)
  
