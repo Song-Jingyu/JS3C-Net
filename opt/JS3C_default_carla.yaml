@@ -46,9 +46,9 @@ Completion:
 
 TRAIN:
   epochs: 100
-  train_workers: 10 # data loader workers
+  train_workers: 8 # data loader workers
   optim: Adam # Adam or SGD
-  batch_size: 1
+  batch_size: 2
   learning_rate: 0.001
   lr_decay: 0.7
   decay_step: 10

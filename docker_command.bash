@@ -1,0 +1,1 @@
+docker run -it --runtime=nvidia -v /media:/media --name js3cnet aee6ba485fef

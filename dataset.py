@@ -6,7 +6,6 @@
 from distutils.command.config import config
 import os
 from pyexpat import features
-from black import out
 import numpy as np
 import random
 import json
@@ -34,7 +33,7 @@ class CarlaDataset(Dataset):
         config=None,
         cylindrical=True,
         voxelize_input=True,
-        binary_counts=False,
+        binary_counts=True,
         random_flips=False,
         JS3C=True,
         split='Train',
